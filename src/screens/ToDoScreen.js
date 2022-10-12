@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import Button from '../components/Button';
 import {useDispatch, useSelector} from 'react-redux';
-import {add, remove} from '../redux/actions/TodoAction';
+import {add, remove,edit} from '../redux/actions/TodoAction';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const ToDoScreen = () => {
   const [todoValue, setTodoValue] = useState(' ');
@@ -41,6 +42,10 @@ const ToDoScreen = () => {
     }
   };
 
+  const editTodo = item =>{
+    dispatch(edit(item));
+  }
+
   const renderTodoList = () => {
     return (
       <FlatList
@@ -50,16 +55,14 @@ const ToDoScreen = () => {
             <View style={styles.todoList}>
               <Text>{item}</Text>
             </View>
-            <TouchableOpacity
+            <Button
               style={styles.removeTodo}
-              onPress={() => removeTodo(item)}>
-              <Text> Del </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.editTodo}
-              onPress={() => editTodo(item)}>
-              <Text> Edit </Text>
-            </TouchableOpacity>
+              onPress={() => removeTodo(item)}
+              label={<Icon name="delete" size={20} color="white" />}
+            />
+            <Button
+              onPress={() => editTodo(item)} label={<Icon name="edit" size={20} color="white" />} style={styles.editTodo}
+            />
           </View>
         )}></FlatList>
     );
@@ -76,7 +79,9 @@ const ToDoScreen = () => {
           value={todoValue}
           onChangeText={setTodoValue}
         />
-        <Button addTodo={addTodo} />
+        <Button onPress={addTodo} label={<Icon name="plus" size={30} color="white" />} color="#900" style={styles.button}/>
+
+        
       </View>
       {renderTodoList()}
     </SafeAreaView>
@@ -94,8 +99,27 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: {
-    margin: 10,
+    color:'black',
+    marginTop:90,
     fontSize: 30,
+    fontWeight: 'bold',
+  },
+  textin:{
+      color: 'white',
+      fontSize: 15,
+      fontWeight: 'bold',
+  },
+  button: {
+      backgroundColor: 'green',
+      borderRadius: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 4,
+      padding:5,
+  },
+  text: {
+    color: 'white',
+    fontSize: 15,
     fontWeight: 'bold',
   },
   input: {
@@ -109,9 +133,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   todoList: {
-    height: 40,
+    height: '100%',
     justifyContent: 'center',
-    width: '70%',
+    width: '75%',
   },
   todoView: {
     flex: 1,
@@ -123,18 +147,20 @@ const styles = StyleSheet.create({
     // borderBottomEndRadius:10,
   },
   removeTodo: {
-    backgroundColor: 'red',
+    backgroundColor: '#E33D3D',
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 4,
+    padding:5,
   },
   editTodo: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#FFD206',
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 4,
+    padding:5,
   },
 });
 
