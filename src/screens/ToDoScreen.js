@@ -7,15 +7,20 @@ import {
   SafeAreaView,
   TextInput,
   FlatList,
-  TouchableOpacity,
 } from 'react-native';
 import Button from '../components/Button';
 import {useDispatch, useSelector} from 'react-redux';
-import {add, remove,edit} from '../redux/actions/TodoAction';
+import {add, edit, remove} from '../redux/actions/TodoAction';
 import Icon from 'react-native-vector-icons/AntDesign';
+
 
 const ToDoScreen = () => {
   const [todoValue, setTodoValue] = useState(' ');
+  const [item,setItem] = useState('');
+  const [itemId,setId] = useState('');
+
+
+
   const dispatch = useDispatch();
   const data = useSelector(state => state);
   const todos = data.todos.todos;
@@ -42,18 +47,23 @@ const ToDoScreen = () => {
     }
   };
 
-  const editTodo = item =>{
+  const editTodo=(item,id)=>{
+    item="noor"
+    console.log("HIIII i am item",item,id)
     dispatch(edit(item));
   }
-
   const renderTodoList = () => {
+
     return (
       <FlatList
         data={todos}
+        // itemId={setId(todos.id)}
         renderItem={({item}) => (
+          console.log("I am item",item,item.id),
           <View style={styles.todoView}>
             <View style={styles.todoList}>
-              <Text>{item}</Text>
+              <TextInput value={item} 
+/>
             </View>
             <Button
               style={styles.removeTodo}
@@ -61,7 +71,7 @@ const ToDoScreen = () => {
               label={<Icon name="delete" size={20} color="white" />}
             />
             <Button
-              onPress={() => editTodo(item)} label={<Icon name="edit" size={20} color="white" />} style={styles.editTodo}
+              onPress={() => editTodo(item,itemId)} label={<Icon name="edit" size={20} color="white" />} style={styles.editTodo}
             />
           </View>
         )}></FlatList>
@@ -100,7 +110,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color:'black',
-    marginTop:90,
+    margin:90,
     fontSize: 30,
     fontWeight: 'bold',
   },

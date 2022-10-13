@@ -1,22 +1,19 @@
-import {ADD_TODO, REMOVE_TODO,EDIT_TODO} from '../actions/Actiontypes'
-const INITIAL_STATE = {todos: [], isEdit: false,editTodoId: "",};
-
+import {ADD_TODO, REMOVE_TODO,EDIT_TODO,ADD_TEXT} from '../actions/Actiontypes'
+const INITIAL_STATE = {todos: [],   isEdit: false,
+  editTodoId: "",};
 
 const todoReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    // case ADD_TEXT:
+    //   return{
+    //     ...state,text:state.todos[action.payload]
+    //   }
     case ADD_TODO:
       return {todos: [...state.todos, action.payload]};
     case REMOVE_TODO:
       return {todos: handleRemoveTodo(action.payload, state.todos)};
       case EDIT_TODO:
-        return {todos: handleEditTodo(action.payload, state.todos)};
-        // const editTodo = action.payload;
-        // let newEditTodo = state.todos.find((item) => item === editTodo);
-        // return {
-        //   ...state,
-        //   isEdit: action.isEdit,
-        //   editTodo: newEditTodo,
-        // };fbvdf
+       console.log(action.payload,)
     default:
       return state;
   }
