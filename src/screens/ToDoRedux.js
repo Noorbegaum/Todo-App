@@ -44,7 +44,7 @@ const ToDoRedux = () => {
     <Text style={styles.text}>Todo App</Text>
     </View>
     <View style={styles.input}>
-    <View >
+    <View>
           <TextInput
             style={styles.inputfield}
             placeholder="✍🏼 Enter Task"
@@ -81,9 +81,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     textAlign: 'center',
-    padding: 20,
     fontWeight:'bold',
-    fontFamily:'Times New Roman'
+    marginTop:10,
+    fontFamily:'Times New Roman',
+    color:'black',
   },
 
   input: {
@@ -100,13 +101,21 @@ const styles = StyleSheet.create({
     flex: 8,
   },
   loginButton: {
-    backgroundColor: '#00ccff',
+    backgroundColor: '#4d0099',
     marginVertical: 20,
     marginHorizontal: 10,
     height: 35,
     width: 20,
     borderRadius: 5,
     flex: 1,
+        shadowColor: '#0a001a',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   inputfield: {
     height: 20,

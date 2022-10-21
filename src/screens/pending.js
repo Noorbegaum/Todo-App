@@ -1,16 +1,6 @@
 import React, {useState} from 'react';
 
-import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TextInput, View} from 'react-native';
 import {TaskField} from '../components/item';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -40,11 +30,6 @@ const Incompleted = ({navigation}) => {
     }
   };
 
-  const handleComplete =()=>{
-    dispatch(todoComplete(item.id))
-    navigation.navigate('Completed')
-  }
-
   // return value.map(todo => !todo.state && <TaskField>{todo.task}</TaskField>);
   return (
     <FlatList
@@ -54,7 +39,6 @@ const Incompleted = ({navigation}) => {
         itemId === item.id
           ? !item.state && (
               <View style={styles.body}>
-               
                 <TextInput
                   style={styles.inputfield}
                   placeholder="Enter your Task "
@@ -64,7 +48,7 @@ const Incompleted = ({navigation}) => {
                 />
                 <View style={styles.iconbody}>
                   <Icon
-                    name="plus-square"
+                    name="check"
                     size={25}
                     color="green"
                     style={styles.iconid}
@@ -77,6 +61,13 @@ const Incompleted = ({navigation}) => {
               <View style={styles.body}>
                 <Text style={styles.input}>{item.task}</Text>
                 <View style={styles.iconbody}>
+                <Icon
+                    name="check"
+                    size={25}
+                    color="green"
+                    style={styles.icon}
+                    onPress={() => dispatch(todoComplete(item.id))}
+                  />
                   <Icon
                     name="edit"
                     size={25}
@@ -85,13 +76,6 @@ const Incompleted = ({navigation}) => {
                     onPress={() => {
                       setItemId(item.id);
                     }}
-                  />
-                  <Icon
-                    name="check"
-                    size={25}
-                    color="green"
-                    style={styles.icon}
-                    onPress={() => dispatch(todoComplete(item.id))}
                   />
                   <Icon
                     name="trash-o"
@@ -113,36 +97,45 @@ const Incompleted = ({navigation}) => {
 const styles = StyleSheet.create({
   body: {
     flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
+    // borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'black',
     // alignContent: 'space-around',
     padding: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 12,
     marginVertical: 10,
     borderRadius: 5,
-    // backgroundColor:"#a9d6e5",
+    backgroundColor: 'white',
+    shadowColor: '#0a001a',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   input: {
     width: 250,
-    height: 30,
+    padding: 8,
     marginVertical: 10,
-    alignContent: 'center',
-    alignItems: 'baseline',
+    justifyContent: 'center',
+    fontSize: 17,
   },
-  flat:{
-    // backgroundColor:'#89c2d9'
+  flat: {
+    backgroundColor: '#f2e6ff',
+    paddingTop:8,
   },
 
   iconbody: {
     flexDirection: 'row',
     alignContent: 'space-between',
     alignItems: 'center',
-  
   },
   icon: {
-    padding:5,
+    padding: 5,
   },
   inputfield: {
+    justifyContent: 'center',
     borderWidth: 1,
     marginHorizontal: 10,
     marginVertical: 10,

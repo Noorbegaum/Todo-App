@@ -34,7 +34,7 @@ const Completed = () => {
             <Text style={styles.input}>{item.task}</Text>
             <View style={styles.iconbody}>
               <Icon
-                name="check-circle-o"
+                name="check"
                 size={25}
                 color="green"
                 style={styles.icon}
@@ -60,17 +60,25 @@ const Completed = () => {
 const styles = StyleSheet.create({
   body: {
     flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'black',
-    alignContent: 'space-around',
     padding: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 12,
     marginVertical: 10,
     borderRadius: 5,
-    // backgroundColor:"#a9d6e5",
+    backgroundColor: 'white',
+    shadowColor: '#0a001a',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   flat:{
-    // backgroundColor:'#89c2d9'
+    backgroundColor: '#f2e6ff',
+    paddingTop:8,
   },
   input: {
     width: 250,
